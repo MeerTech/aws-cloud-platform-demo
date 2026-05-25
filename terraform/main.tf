@@ -23,24 +23,23 @@ provider "aws" {
   profile = "demo"
 }
 
-module "vpc" {
-  source = "./modules/vpc"
+data "aws_caller_identity" "current" {}
 
+module "vpc" {
+  source      = "./modules/vpc"
   project     = var.project
   environment = var.environment
 }
 
 module "security" {
-  source = "./modules/security"
-
+  source      = "./modules/security"
   project     = var.project
   environment = var.environment
   vpc_id      = module.vpc.vpc_id
 }
 
 module "compute" {
-  source = "./modules/compute"
-
+  source                    = "./modules/compute"
   project                   = var.project
   environment               = var.environment
   ami_id                    = "ami-0576ef8e344fbf536"
@@ -48,4 +47,11 @@ module "compute" {
   private_subnet_ids        = module.vpc.private_subnet_ids
   app_sg_id                 = module.security.app_sg_id
   ec2_instance_profile_name = module.security.ec2_instance_profile_name
+}
+
+module "storage" {
+  source      = "./modules/storage"
+  project     = var.project
+  environment = var.environment
+  account_id  = data.aws_caller_identity.current.account_id
 }
