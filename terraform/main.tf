@@ -29,3 +29,11 @@ module "vpc" {
   project     = var.project
   environment = var.environment
 }
+
+module "security" {
+  source = "./modules/security"
+
+  project     = var.project
+  environment = var.environment
+  vpc_id      = module.vpc.vpc_id
+}
