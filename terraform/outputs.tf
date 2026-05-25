@@ -27,3 +27,13 @@ output "ec2_instance_profile_name" {
   description = "EC2 instance profile name"
   value       = module.security.ec2_instance_profile_name
 }
+
+output "instance_id" {
+  description = "EC2 instance ID"
+  value       = module.compute.instance_id
+}
+
+output "instance_private_ip" {
+  description = "EC2 private IP"
+  value       = module.compute.instance_private_ip
+}

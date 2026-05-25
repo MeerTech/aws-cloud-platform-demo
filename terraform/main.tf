@@ -37,3 +37,15 @@ module "security" {
   environment = var.environment
   vpc_id      = module.vpc.vpc_id
 }
+
+module "compute" {
+  source = "./modules/compute"
+
+  project                   = var.project
+  environment               = var.environment
+  ami_id                    = "ami-0576ef8e344fbf536"
+  instance_type             = "t4g.micro"
+  private_subnet_ids        = module.vpc.private_subnet_ids
+  app_sg_id                 = module.security.app_sg_id
+  ec2_instance_profile_name = module.security.ec2_instance_profile_name
+}
