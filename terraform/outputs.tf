@@ -57,3 +57,8 @@ output "db_endpoint" {
   description = "RDS endpoint"
   value       = module.rds.db_endpoint
 }
+
+output "db_secret_name" {
+  description = "Secrets Manager secret name for DB credentials"
+  value       = module.rds.db_secret_name
+}

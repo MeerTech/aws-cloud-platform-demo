@@ -240,3 +240,23 @@ resource "aws_appautoscaling_policy" "memory_scale_out" {
     scale_out_cooldown = 60
   }
 }
+
+# Policy allowing ECS tasks to read DB credentials from Secrets Manager
+resource "aws_iam_role_policy" "ecs_secrets" {
+  name = "${var.project}-ecs-secrets-policy"
+  role = aws_iam_role.ecs_task.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ]
+        Resource = var.db_secret_arn
+      }
+    ]
+  })
+}

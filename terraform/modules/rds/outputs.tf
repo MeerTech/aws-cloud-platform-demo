@@ -17,3 +17,13 @@ output "rds_sg_id" {
   description = "RDS security group ID"
   value       = aws_security_group.rds.id
 }
+
+output "db_secret_arn" {
+  description = "Secrets Manager ARN for DB credentials"
+  value       = aws_secretsmanager_secret.db_credentials.arn
+}
+
+output "db_secret_name" {
+  description = "Secrets Manager secret name"
+  value       = aws_secretsmanager_secret.db_credentials.name
+}

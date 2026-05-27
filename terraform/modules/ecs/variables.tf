@@ -37,3 +37,8 @@ variable "ecr_repository_url" {
   description = "ECR repository URL"
   type        = string
 }
+
+variable "db_secret_arn" {
+  description = "Secrets Manager ARN for DB credentials"
+  type        = string
+}

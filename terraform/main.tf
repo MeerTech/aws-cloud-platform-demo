@@ -54,6 +54,16 @@ module "storage" {
   account_id  = data.aws_caller_identity.current.account_id
 }
 
+module "rds" {
+  source             = "./modules/rds"
+  project            = var.project
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  app_sg_id          = module.security.app_sg_id
+  db_password        = var.db_password
+}
+
 module "ecs" {
   source             = "./modules/ecs"
   project            = var.project
@@ -64,6 +74,7 @@ module "ecs" {
   alb_sg_id          = module.security.alb_sg_id
   app_sg_id          = module.security.app_sg_id
   ecr_repository_url = module.compute.ecr_repository_url
+  db_secret_arn      = module.rds.db_secret_arn
 }
 
 module "security_baseline" {
@@ -81,14 +92,4 @@ module "cloudwatch" {
   ecs_service_name        = module.ecs.ecs_service_name
   alb_arn_suffix          = module.ecs.alb_arn_suffix
   target_group_arn_suffix = module.ecs.target_group_arn_suffix
-}
-
-module "rds" {
-  source             = "./modules/rds"
-  project            = var.project
-  environment        = var.environment
-  vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnet_ids
-  app_sg_id          = module.security.app_sg_id
-  db_password        = var.db_password
 }
