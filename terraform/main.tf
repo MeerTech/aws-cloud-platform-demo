@@ -82,3 +82,13 @@ module "cloudwatch" {
   alb_arn_suffix          = module.ecs.alb_arn_suffix
   target_group_arn_suffix = module.ecs.target_group_arn_suffix
 }
+
+module "rds" {
+  source             = "./modules/rds"
+  project            = var.project
+  environment        = var.environment
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  app_sg_id          = module.security.app_sg_id
+  db_password        = var.db_password
+}

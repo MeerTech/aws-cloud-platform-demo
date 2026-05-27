@@ -52,3 +52,8 @@ output "dashboard_url" {
   description = "CloudWatch dashboard URL"
   value       = module.cloudwatch.dashboard_url
 }
+
+output "db_endpoint" {
+  description = "RDS endpoint"
+  value       = module.rds.db_endpoint
+}
