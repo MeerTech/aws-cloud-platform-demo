@@ -106,6 +106,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "ECS CPU Utilization"
+          region = "us-east-1"
           period = 300
           stat   = "Average"
           metrics = [
@@ -124,6 +125,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "ECS Memory Utilization"
+          region = "us-east-1"
           period = 300
           stat   = "Average"
           metrics = [
@@ -142,6 +144,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "ALB Request Count"
+          region = "us-east-1"
           period = 300
           stat   = "Sum"
           metrics = [
@@ -158,6 +161,7 @@ resource "aws_cloudwatch_dashboard" "main" {
         height = 6
         properties = {
           title  = "ALB 5xx Errors"
+          region = "us-east-1"
           period = 300
           stat   = "Sum"
           metrics = [
@@ -173,7 +177,8 @@ resource "aws_cloudwatch_dashboard" "main" {
         width  = 24
         height = 4
         properties = {
-          title = "Alarm Status"
+          title  = "Alarm Status"
+          region = "us-east-1"
           alarms = [
             aws_cloudwatch_metric_alarm.ecs_cpu.arn,
             aws_cloudwatch_metric_alarm.ecs_memory.arn,
