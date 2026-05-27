@@ -65,3 +65,10 @@ module "ecs" {
   app_sg_id          = module.security.app_sg_id
   ecr_repository_url = module.compute.ecr_repository_url
 }
+
+module "security_baseline" {
+  source      = "./modules/security-baseline"
+  project     = var.project
+  environment = var.environment
+  account_id  = data.aws_caller_identity.current.account_id
+}
