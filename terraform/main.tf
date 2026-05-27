@@ -13,14 +13,12 @@ terraform {
     key          = "platform/terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
-    profile      = "demo"
     use_lockfile = true
   }
 }
 
 provider "aws" {
-  region  = "us-east-1"
-  profile = "demo"
+  region = "us-east-1"
 }
 
 data "aws_caller_identity" "current" {}

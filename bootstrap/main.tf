@@ -1,9 +1,7 @@
 provider "aws" {
-  region  = "us-east-1"
-  profile = "demo"
+  region = "us-east-1"
 }
 
-# S3 bucket for Terraform remote state
 resource "aws_s3_bucket" "tfstate" {
   bucket = "aws-cloud-platform-demo-tfstate-433134836357"
 
@@ -38,7 +36,6 @@ resource "aws_s3_bucket_public_access_block" "tfstate" {
   restrict_public_buckets = true
 }
 
-# DynamoDB table for state locking
 resource "aws_dynamodb_table" "tfstate_lock" {
   name         = "aws-cloud-platform-demo-tfstate-lock"
   billing_mode = "PAY_PER_REQUEST"
