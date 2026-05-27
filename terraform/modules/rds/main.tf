@@ -89,9 +89,9 @@ resource "aws_db_instance" "main" {
   backup_window           = "03:00-04:00"
   maintenance_window      = "Mon:04:00-Mon:05:00"
 
-  deletion_protection       = false
-  skip_final_snapshot       = true
-  delete_automated_backups  = true
+  deletion_protection      = false
+  skip_final_snapshot      = true
+  delete_automated_backups = true
 
   publicly_accessible = false
 
