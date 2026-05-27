@@ -11,6 +11,7 @@ on:
 env:
   AWS_REGION: us-east-1
   TF_WORKING_DIR: terraform
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   terraform:
@@ -51,8 +52,16 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -out=tfplan
-        continue-on-error: false
+        run: |
+          terraform plan -no-color -detailed-exitcode -out=tfplan
+        continue-on-error: true
+
+      - name: Check Plan Exit Code
+        run: |
+          if [ ${{ steps.plan.outputs.exitcode }} -eq 1 ]; then
+            echo "Terraform plan failed"
+            exit 1
+          fi
 
       - name: Post Plan to PR
         if: github.event_name == 'pull_request'
@@ -74,5 +83,5 @@ jobs:
             })
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && steps.plan.outputs.exitcode == 2
         run: terraform apply -auto-approve tfplan
