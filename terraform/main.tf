@@ -72,3 +72,13 @@ module "security_baseline" {
   environment = var.environment
   account_id  = data.aws_caller_identity.current.account_id
 }
+
+module "cloudwatch" {
+  source                  = "./modules/cloudwatch"
+  project                 = var.project
+  environment             = var.environment
+  ecs_cluster_name        = module.ecs.ecs_cluster_name
+  ecs_service_name        = module.ecs.ecs_service_name
+  alb_arn_suffix          = module.ecs.alb_arn_suffix
+  target_group_arn_suffix = module.ecs.target_group_arn_suffix
+}

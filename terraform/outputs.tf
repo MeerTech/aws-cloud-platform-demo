@@ -47,3 +47,8 @@ output "alb_dns_name" {
   description = "Application URL"
   value       = module.ecs.alb_dns_name
 }
+
+output "dashboard_url" {
+  description = "CloudWatch dashboard URL"
+  value       = module.cloudwatch.dashboard_url
+}
