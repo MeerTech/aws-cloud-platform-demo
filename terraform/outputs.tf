@@ -42,3 +42,8 @@ output "ecr_repository_url" {
   description = "ECR repository URL"
   value       = module.compute.ecr_repository_url
 }
+
+output "alb_dns_name" {
+  description = "Application URL"
+  value       = module.ecs.alb_dns_name
+}
