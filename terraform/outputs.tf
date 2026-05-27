@@ -37,3 +37,8 @@ output "app_bucket_name" {
 output "kms_key_id" {
   value = module.storage.kms_key_id
 }
+
+output "ecr_repository_url" {
+  description = "ECR repository URL"
+  value       = module.compute.ecr_repository_url
+}
