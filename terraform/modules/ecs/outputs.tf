@@ -22,3 +22,13 @@ output "target_group_arn_suffix" {
   description = "Target group ARN suffix for CloudWatch"
   value       = aws_lb_target_group.app.arn_suffix
 }
+
+output "autoscaling_min_capacity" {
+  description = "Minimum ECS task count"
+  value       = aws_appautoscaling_target.ecs.min_capacity
+}
+
+output "autoscaling_max_capacity" {
+  description = "Maximum ECS task count"
+  value       = aws_appautoscaling_target.ecs.max_capacity
+}
