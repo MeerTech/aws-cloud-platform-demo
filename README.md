@@ -170,16 +170,3 @@ A production-grade AWS platform built to demonstrate cloud modernization — mig
     cd terraform
     AWS_PROFILE=demo TF_VAR_db_password='your-password' terraform destroy
 
-## Key Interview Points
-
-On modernization:
-"The core shift is from mutable infrastructure managed manually to immutable infrastructure managed as code. Every resource is reproducible from a git commit. Every deployment is automated. Every access is audited."
-
-On security:
-"Zero SSH anywhere. SSM Session Manager for access, Secrets Manager for credentials, security group chaining so nothing is directly internet-reachable. CloudTrail logs every API call — in insurance that audit trail is a compliance requirement."
-
-On reliability:
-"Multi-AZ RDS gives us RPO of zero and RTO under 2 minutes for AZ failures. ECS auto scaling handles load spikes without manual intervention. Two AZs means no single datacenter failure takes us down."
-
-On cost:
-"Graviton2 instances, Fargate pay-per-use, S3 lifecycle policies, and mandatory tagging for cost allocation. FinOps discipline is built into the platform, not bolted on later."
