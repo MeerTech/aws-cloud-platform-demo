@@ -104,7 +104,7 @@ resource "aws_s3_bucket_policy" "app_data" {
         Effect    = "Deny"
         Principal = "*"
         Action    = "s3:*"
-        Resource  = [
+        Resource = [
           aws_s3_bucket.app_data.arn,
           "${aws_s3_bucket.app_data.arn}/*"
         ]
