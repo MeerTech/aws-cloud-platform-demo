@@ -19,6 +19,17 @@ terraform {
 
 provider "aws" {
   region = "us-east-1"
+
+  default_tags {
+    tags = {
+      Project     = "aws-cloud-platform-demo"
+      Environment = var.environment
+      ManagedBy   = "terraform"
+      Owner       = "mirghani-abdelhadi"
+      CostCenter  = "platform-engineering"
+      Repository  = "github.com/MeerTech/aws-cloud-platform-demo"
+    }
+  }
 }
 
 data "aws_caller_identity" "current" {}
